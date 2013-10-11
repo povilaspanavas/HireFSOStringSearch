@@ -79,6 +79,34 @@ namespace StringFilter.Tests
         }
 
         [Test]
+        public void Test2xItemFitCaseInsensitive()
+        {
+            Test(1, new List<string> { "AAaBBb", "aAa", "Bbb" }, "aaabbb");
+        }
+
+        [Test]
+        public void Test1xItemFitCaseSensitive()
+        {
+            var result = new StringFilter(true).Filter(new List<string> { "AAaBBb", "AAa", "BBb" });
+            Assert.AreEqual(1, result.Count);
+            Assert.IsTrue(result.Contains("AAaBBb"));
+        }
+
+        [Test]
+        public void Test0xItemFitCaseSensitive()
+        {
+            var result = new StringFilter(true).Filter(new List<string> { "aaabbb", "aAa", "Bbb" });
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [Test]
+        public void Test0xItemFitTwoStringsOfLength6()
+        {
+            var result = _stringFilter.Filter(new List<string> { "123456", "123456" });
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [Test]
         public void TestFromAssignment()
         {
             var result = _stringFilter.Filter(new List<string> { "al", "albums", "aver", "bar", "barely", 

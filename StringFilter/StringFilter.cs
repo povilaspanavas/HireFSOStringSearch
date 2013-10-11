@@ -35,21 +35,19 @@ namespace StringFilter
         /// <returns></returns>
         public List<string> Filter(List<string> strList)
         {
-            if (_caseSensitive)
-                strList = new List<string>(strList.Select(s => s.ToLower()));
-
             if (strList == null)
                 throw new ArgumentNullException("strList");
             if (strList.Count == 0)
                 return new List<string>();
-            var hashSet = new HashSet<string>(); // list.Contain is slow for large lists
+
+            if (_caseSensitive == false)
+                strList = new List<string>(strList.Select(s => s.ToLower()));
+
+            // list.Contain is slow for large lists, so we use hashset
+            // also, we expect only search for strings with length 6
+            var hashSet = new HashSet<string>(strList.Where(str => str.Length == 6)); 
             var resultHashSet = new HashSet<string>(); // results
-            foreach (var str in strList)
-            {
-                if (str.Length != 6) // the less data the better
-                    continue;
-                hashSet.Add(str); 
-            }
+            
             // check A + B, A + C, A + D...
             // later check B + C, B + D, B + E
             for (int i = 0; i < strList.Count; i++)
