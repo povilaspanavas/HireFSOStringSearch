@@ -54,6 +54,26 @@ namespace StringFilter.Tests
             Test(2, new List<string> { "aaabbb", "aaa", "bbb", "123456", "456", "123" });
         }
 
+        [Test]
+        public void TestFromAssignment()
+        {
+            var result = _stringFilter.Filter(new List<string> { "al", "albums", "aver", "bar", "barely", 
+                "be", "befoul", "bums", "by", "cat", "con", "convex", "ely", "foul", "here", 
+                "hereby", "jig", "jigsaw", "or", "saw", "tail", "tailor", "vex", "we", "weaver"});
+            // Test count
+            Assert.AreEqual(8, result.Count);
+
+            // Test values
+            Assert.IsTrue(result.Contains("albums"));
+            Assert.IsTrue(result.Contains("barely"));
+            Assert.IsTrue(result.Contains("befoul"));
+            Assert.IsTrue(result.Contains("convex"));
+            Assert.IsTrue(result.Contains("hereby"));
+            Assert.IsTrue(result.Contains("jigsaw"));
+            Assert.IsTrue(result.Contains("tailor"));
+            Assert.IsTrue(result.Contains("weaver"));
+        }
+
         public void Test(int expectedCount, List<string> strList)
         {
             Assert.AreEqual(expectedCount, _stringFilter.Filter(strList).Count);
