@@ -9,14 +9,15 @@ namespace StringFilter
         /// <summary>
         /// The assignment wasn't clear enough as most often happens with real requirements.
         /// Firstly, "NUnit" is third party library in my point of view (open source library)
-        /// and I shouldn't be include it. Strainge, isn't it?..
+        /// and shouldn't be included. Strainge, isn't it?.. So, here is the link
+        /// with included NUnit where you could just launch solution, compile and run tests:
+        /// git clone https://github.com/povilaspanavas/HireFSOStringSearch.git
         /// Secondly, there isn't data about incoming string lists. For example, if there
         /// is lots of small strings, but small count of strings with length of 6, we
         /// could do different search (cycle trough only strings of length 6 ant try to 
-        /// disassemble them, then search fors siassembled parts).
+        /// disassemble them, then search for disassembled parts).
         /// If that would be too slow, we could have dictionaries, where key would be first
-        /// first letter, and value hashset containing all the words starting with
-        /// that letter.
+        /// letter, and value hashset containing all the words starting with that letter.
         /// Thirdly, no mentioning if data is case sensitive? Current implementation is,
         /// but it's easy to change.
         /// </summary>
