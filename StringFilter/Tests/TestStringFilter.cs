@@ -36,26 +36,27 @@ namespace StringFilter.Tests
         [Test]
         public void Test1xItemFit()
         {
-            Test(1, new List<string> { "aaabbb", "aaa", "bbb" });
+            Test(1, new List<string> { "aaabbb", "aaa", "bbb" }, "aaabbb");
         }
 
 
         [Test]
         public void Test1xItemFitDifferentSide()
         {
-            Test(1, new List<string> { "bbbaaa", "aaa", "bbb" });
+            Test(1, new List<string> { "bbbaaa", "aaa", "bbb" }, "bbbaaa");
         }
 
         [Test]
         public void Test2xItemFit()
         {
-            Test(2, new List<string> { "aaabbb", "aaa", "bbb", "123456", "456", "123" });
+            Test(2, new List<string> { "aaabbb", "aaa", "bbb", "123456", "456", "123" },
+                "aaabbb", "123456");
         }
 
         [Test]
         public void Test1xItemFitDifferentStringLength()
         {
-            Test(1, new List<string> { "123456", "1", "23456" });
+            Test(1, new List<string> { "123456", "1", "23456" }, "123456");
         }
 
         [Test]
@@ -67,13 +68,14 @@ namespace StringFilter.Tests
         [Test]
         public void TestTwoTheSameStringsOfLength3()
         {
-            Test(1, new List<string> { "123456", "123", "456", "123", "456" });
+            Test(1, new List<string> { "123456", "123", "456", "123", "456" }, "123456");
         }
 
         [Test]
         public void TestManyEqualStrings()
         {
-            Test(1, new List<string> { "123456", "123", "456", "123", "456", "456", "123456" });
+            Test(1, new List<string> { "123456", "123", "456", "123", "456", "456", "123456"},
+                "123456");
         }
 
         [Test]
@@ -96,9 +98,22 @@ namespace StringFilter.Tests
             Assert.IsTrue(result.Contains("weaver"));
         }
 
-        public void Test(int expectedCount, List<string> strList)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="expectedCount">How much elements should be in the result list</param>
+        /// <param name="strList">Strings list for a search</param>
+        /// <param name="mustContainStrings">List of strings, which should be found</param>
+        public void Test(int expectedCount, List<string> strList, params string[] mustContainStrings)
         {
-            Assert.AreEqual(expectedCount, _stringFilter.Filter(strList).Count);
+            var result = _stringFilter.Filter(strList);
+            Assert.AreEqual(expectedCount, result.Count);
+
+            foreach (var containString in mustContainStrings)
+            {
+                Assert.IsTrue(result.Contains(containString),
+                    string.Format("The list doesn't contain string {0}", containString));                
+            }
         }
     }
 }
