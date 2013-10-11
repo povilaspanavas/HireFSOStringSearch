@@ -6,13 +6,29 @@ namespace StringFilter
 {
     public class StringFilter
     {
+        /// <summary>
+        /// The assignment wasn't clear enough as most often happens with real requirements.
+        /// Firstly, "NUnit" is third party library in my point of view (open source library)
+        /// and I shouldn't be include it. Strainge, isn't it?..
+        /// Secondly, there isn't data about incoming string lists. For example, if there
+        /// is lots of small strings, but small count of strings with length of 6, we
+        /// could do different search (cycle trough only strings of length 6 ant try to 
+        /// disassemble them, then search fors siassembled parts).
+        /// If that would be too slow, we could have dictionaries, where key would be first
+        /// first letter, and value hashset containing all the words starting with
+        /// that letter.
+        /// Thirdly, no mentioning if data is case sensitive? Current implementation is,
+        /// but it's easy to change.
+        /// </summary>
+        /// <param name="strList"></param>
+        /// <returns></returns>
         public List<string> Filter(List<string> strList)
         {
             if (strList == null)
                 throw new ArgumentNullException("strList");
             if (strList.Count == 0)
                 return new List<string>();
-            var hashSet = new HashSet<string>(); // lists are slow for lots of data
+            var hashSet = new HashSet<string>(); // list.Contain is slow for large lists
             var resultHashSet = new HashSet<string>(); // results
             foreach (var str in strList)
             {
@@ -20,6 +36,8 @@ namespace StringFilter
                     continue;
                 hashSet.Add(str); 
             }
+            // check A + B, A + C, A + D...
+            // later check B + C, B + D, B + E
             for (int i = 0; i < strList.Count; i++)
             {
                 if (strList[i].Length >= 6) // technically it wouldn't be two strings if the first is length of 6
