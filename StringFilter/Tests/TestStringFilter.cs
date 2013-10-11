@@ -25,9 +25,33 @@ namespace StringFilter.Tests
         }
 
         [Test]
-        public void TestOneItem()
+        public void Test1xItem()
         {
             Test(0, new List<string> {"asadfd"});
+        }
+
+        [Test]
+        public void Test2xItem()
+        {
+            Test(0, new List<string> { "asadfd", "sad" });
+        }
+
+        [Test]
+        public void Test1xItemFit()
+        {
+            Test(1, new List<string> { "aaabbb", "aaa", "bbb" });
+        }
+
+        [Test]
+        public void Test1xItemFitDifferentSide()
+        {
+            Test(1, new List<string> { "bbbaaa", "aaa", "bbb" });
+        }
+
+        [Test]
+        public void Test2xItemFit()
+        {
+            Test(2, new List<string> { "aaabbb", "aaa", "bbb", "123456", "456", "123" });
         }
 
         public void Test(int expectedCount, List<string> strList)
