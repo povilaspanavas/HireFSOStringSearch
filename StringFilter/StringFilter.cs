@@ -19,6 +19,8 @@ namespace StringFilter
     /// letter, and value hashset containing all the words starting with that letter.
     /// Thirdly, no mentioning if data is case sensitive? Just in case, I've made a 
     /// parrameter for that.
+    /// Fourthly, there is no information whether two equal strings should get to results. 
+    /// I decided to include only one of them.
     /// </summary>
     public class StringFilter
     {
@@ -60,21 +62,16 @@ namespace StringFilter
                     var concatStr = strList[i] + strList[j];
                     if (concatStr.Length != 6) // we are limited to 6 symbols
                         continue;
-                    if (IsFit(concatStr, hashSet, resultHashSet))
-                        resultHashSet.Add(concatStr);
+                    if (hashSet.Contains(concatStr))
+                        resultHashSet.Add(concatStr); // HashSet.Add skips duplicates
                     
                     // B + A
                     concatStr = strList[j] + strList[i];
-                    if (IsFit(concatStr, hashSet, resultHashSet))
-                        resultHashSet.Add(concatStr);
+                    if (hashSet.Contains(concatStr))
+                        resultHashSet.Add(concatStr); // HashSet.Add skips duplicates
                 }
             }
             return resultHashSet.ToList();
-        }
-
-        private bool IsFit(string str, ICollection<string> hashSet, ICollection<string> resultHashSet)
-        {
-            return hashSet.Contains(str) && resultHashSet.Contains(str) == false;
         }
     }
 }
