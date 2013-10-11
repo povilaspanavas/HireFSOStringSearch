@@ -26,18 +26,27 @@ namespace StringFilter
             {
                 if (strList[i].Length >= 6) // technically it wouldn't be two strings if the first is length of 6
                     continue;
-                // TODO ilgis turi b8ti  6
-                // TODO tikrinti i6 abiej7 galu 0 + 1 ir 1 + 0
                 for (int j = i + 1; j < strList.Count; j++)
                 {
-                    var concatStr= strList[i] + strList[j];
-                    if (concatStr.Length > 6) // we are limited to 6 symbols
+                    // A + B
+                    var concatStr = strList[i] + strList[j];
+                    if (concatStr.Length != 6) // we are limited to 6 symbols
                         continue;
-                    if (hashSet.Contains(concatStr) && resultHashSet.Contains(concatStr) == false)
+                    if (IsFit(concatStr, hashSet, resultHashSet))
+                        resultHashSet.Add(concatStr);
+                    
+                    // B + A
+                    concatStr = strList[j] + strList[i];
+                    if (IsFit(concatStr, hashSet, resultHashSet))
                         resultHashSet.Add(concatStr);
                 }
             }
             return resultHashSet.ToList();
+        }
+
+        private bool IsFit(string str, ICollection<string> hashSet, ICollection<string> resultHashSet)
+        {
+            return hashSet.Contains(str) && resultHashSet.Contains(str) == false;
         }
     }
 }
