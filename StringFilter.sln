@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringFilter", "StringFilter.csproj", "{EE5EE2B9-AA0A-4055-83BD-D3F7B52C329A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringFilter", "StringFilter\StringFilter.csproj", "{EE5EE2B9-AA0A-4055-83BD-D3F7B52C329A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
