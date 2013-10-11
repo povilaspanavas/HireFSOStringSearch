@@ -18,7 +18,9 @@ namespace StringFilter
             var resultHashSet = new HashSet<string>(); // results
             foreach (var str in strList)
             {
-                hashSet.Add(str);
+                if (str.Length != 6) // the less data the better
+                    continue;
+                hashSet.Add(str); 
             }
             for (int i = 0; i < strList.Count; i++)
             {
@@ -35,7 +37,7 @@ namespace StringFilter
                         resultHashSet.Add(concatStr);
                 }
             }
-            return new List<string>(hashSet);
+            return resultHashSet.ToList();
         }
     }
 }

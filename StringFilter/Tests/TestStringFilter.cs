@@ -10,7 +10,7 @@ namespace StringFilter.Tests
     [TestFixture]
     public class TestStringFilter
     {
-        private StringFilter _stringFilter = new StringFilter();
+        private readonly StringFilter _stringFilter = new StringFilter();
 
         [Test, ExpectedException(typeof(ArgumentNullException))]
         public void TestNullParameter()
@@ -21,7 +21,18 @@ namespace StringFilter.Tests
         [Test]
         public void TestEmptyList()
         {
-            Assert.AreEqual(0, _stringFilter.Filter(new List<string>()).Count);
+            Test(0, new List<string>());
+        }
+
+        [Test]
+        public void TestOneItem()
+        {
+            Test(0, new List<string> {"asadfd"});
+        }
+
+        public void Test(int expectedCount, List<string> strList)
+        {
+            Assert.AreEqual(expectedCount, _stringFilter.Filter(strList).Count);
         }
     }
 }
