@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace StringFilter.Tests
@@ -42,6 +39,7 @@ namespace StringFilter.Tests
             Test(1, new List<string> { "aaabbb", "aaa", "bbb" });
         }
 
+
         [Test]
         public void Test1xItemFitDifferentSide()
         {
@@ -52,6 +50,30 @@ namespace StringFilter.Tests
         public void Test2xItemFit()
         {
             Test(2, new List<string> { "aaabbb", "aaa", "bbb", "123456", "456", "123" });
+        }
+
+        [Test]
+        public void Test1xItemFitDifferentStringLength()
+        {
+            Test(1, new List<string> { "123456", "1", "23456" });
+        }
+
+        [Test]
+        public void TestFitsOnlyOfLength6()
+        {
+            Test(0, new List<string> { "1234567", "123", "4567" });
+        }
+
+        [Test]
+        public void TestTwoTheSameStringsOfLength3()
+        {
+            Test(1, new List<string> { "123456", "123", "456", "123", "456" });
+        }
+
+        [Test]
+        public void TestManyEqualStrings()
+        {
+            Test(1, new List<string> { "123456", "123", "456", "123", "456", "456", "123456" });
         }
 
         [Test]
