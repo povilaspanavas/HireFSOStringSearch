@@ -17,10 +17,11 @@ namespace StringFilter
     /// disassemble them, then search for disassembled parts).
     /// If that would be too slow, we could have dictionaries, where key would be first
     /// letter, and value hashset containing all the words starting with that letter.
-    /// Thirdly, no mentioning if data is case sensitive? Just in case, I've made a 
+    /// Thirdly, no mentioning if data is case sensitive. Just in case, I've made a 
     /// parrameter for that.
     /// Fourthly, there is no information whether two equal strings should get to results. 
-    /// I decided to include only one of them.
+    /// I decided to include only one of them, because most of the time in real life cases
+    /// we would need only distinct values.
     /// </summary>
     public class StringFilter
     {
